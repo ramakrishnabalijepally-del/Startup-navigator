@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+
+# ChromaDB (rebuild via /admin/reindex after deploy)
+backend/chroma_db/
+
+# SQLite test DB
+backend/test.db
+
+# Node
+node_modules/
+.next/
+frontend/.env.local
+
+# Misc
+.DS_Store
+*.log
+dist/
+build/
+.claude/
+test_embeded.ipynb

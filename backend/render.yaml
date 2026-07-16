@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: startup-navigator-api
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt && alembic upgrade head && python seed.py
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET_KEY
+        sync: false
+      - key: GOOGLE_API_KEY
+        sync: false
+      - key: FRONTEND_URL
+        sync: false
+      - key: ENVIRONMENT
+        value: production
+      - key: GEMINI_EMBEDDING_MODEL
+        value: models/gemini-embedding-001
+      - key: GEMINI_GENERATION_MODEL
+        value: gemini-2.0-flash
+      - key: CHROMA_PERSIST_DIR
+        value: ./chroma_db
