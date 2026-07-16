@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #f8fafc;
+    --foreground: #0F172A;
+    --card: #ffffff;
+    --card-border: #e2e8f0;
+    --muted: #f1f5f9;
+    --muted-foreground: #64748b;
+    --accent: #14B8A6;
+  }
+
+  .dark {
+    --background: #0b1120;
+    --foreground: #e2e8f0;
+    --card: #111827;
+    --card-border: #1e293b;
+    --muted: #1e293b;
+    --muted-foreground: #94a3b8;
+    --accent: #14B8A6;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-inter), sans-serif;
+    @apply antialiased transition-colors duration-200;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-space-grotesk), sans-serif;
+  }
+}
+
+@layer components {
+  .card {
+    background-color: var(--card);
+    border: 1px solid var(--card-border);
+    @apply rounded-xl shadow-sm;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-medium text-sm
+           bg-teal-500 text-white hover:bg-teal-600
+           transition-all duration-200 hover:shadow-md hover:-translate-y-0.5
+           disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-medium text-sm
+           bg-navy-900 text-white hover:bg-navy-800
+           dark:bg-slate-700 dark:hover:bg-slate-600
+           transition-all duration-200 hover:shadow-md hover:-translate-y-0.5
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-medium text-sm
+           border border-slate-300 dark:border-slate-600
+           text-slate-700 dark:text-slate-300
+           hover:bg-slate-100 dark:hover:bg-slate-800
+           transition-all duration-200;
+  }
+
+  .input {
+    @apply w-full px-4 py-2.5 rounded-xl text-sm
+           bg-white dark:bg-slate-800
+           border border-slate-300 dark:border-slate-600
+           text-slate-900 dark:text-slate-100
+           placeholder:text-slate-400
+           focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent
+           transition-all duration-200;
+  }
+
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .skeleton {
+    @apply animate-pulse bg-slate-200 dark:bg-slate-700 rounded-lg;
+  }
+
+  .section-heading {
+    @apply text-2xl md:text-3xl font-bold text-navy-900 dark:text-white;
+    font-family: var(--font-space-grotesk), sans-serif;
+  }
+
+  .nav-link {
+    @apply text-sm font-medium text-slate-600 dark:text-slate-300
+           hover:text-teal-600 dark:hover:text-teal-400
+           transition-colors duration-150;
+  }
+}
