@@ -14,7 +14,13 @@ from app.config import get_settings
 router = APIRouter(prefix="/auth", tags=["auth"])
 settings = get_settings()
 
-COOKIE_OPTS = dict(httponly=True, samesite="lax", secure=settings.environment == "production")
+_prod = settings.environment == "production"
+COOKIE_OPTS = dict(
+    httponly=True,
+    samesite="none" if _prod else "lax",
+    secure=_prod,
+    path="/",
+)
 
 
 @router.post("/register", response_model=TokenResponse, status_code=201)
