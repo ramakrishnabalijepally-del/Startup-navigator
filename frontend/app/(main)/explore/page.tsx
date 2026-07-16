@@ -32,6 +32,7 @@ function ExploreContent() {
     }
   }, []);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { load(activeCategory, search); }, [activeCategory, load]);
 
   const handleSearch = (e: React.FormEvent) => {
