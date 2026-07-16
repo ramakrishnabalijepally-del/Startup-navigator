@@ -30,7 +30,7 @@ export default function ContactPage() {
         <CheckCircle className="w-7 h-7 text-green-500" />
       </div>
       <h2 className="section-heading mb-3">Message Sent!</h2>
-      <p className="text-slate-500 dark:text-slate-400">Thanks for reaching out. We'll get back to you shortly.</p>
+      <p className="text-slate-500 dark:text-slate-400">Thanks for reaching out. We&apos;ll get back to you shortly.</p>
       <button onClick={() => { setSent(false); setForm({ name: "", email: "", subject: "", message: "" }); }}
         className="btn-outline mt-6">Send another message</button>
     </div>
@@ -43,7 +43,7 @@ export default function ContactPage() {
           <Mail className="w-5 h-5 text-teal-500" />
         </div>
         <h1 className="section-heading mb-2">Contact Us</h1>
-        <p className="text-slate-500 dark:text-slate-400">Have a question or suggestion? We'd love to hear from you.</p>
+        <p className="text-slate-500 dark:text-slate-400">Have a question or suggestion? We&apos;d love to hear from you.</p>
       </div>
 
       <form onSubmit={handleSubmit} className="card p-6 md:p-8 space-y-5">

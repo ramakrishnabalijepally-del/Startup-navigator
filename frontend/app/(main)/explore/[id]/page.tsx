@@ -40,7 +40,7 @@ export default function ArticlePage() {
   );
 
   // Convert markdown-style content to simple HTML paragraphs
-  const sections = article.content.split(/\n\n+/);
+  const sections = (article.content ?? "").split(/\n\n+/);
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-10 animate-fade-in">
