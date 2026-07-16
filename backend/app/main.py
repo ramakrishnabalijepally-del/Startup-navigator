@@ -12,10 +12,16 @@ app = FastAPI(
     redoc_url="/redoc",
 )
 
+# Support comma-separated origins in FRONTEND_URL env var.
+# e.g. FRONTEND_URL=https://foo.vercel.app,http://localhost:3000
+_origins = [o.strip() for o in settings.frontend_url.split(",") if o.strip()]
+if "http://localhost:3000" not in _origins:
+    _origins.append("http://localhost:3000")
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[settings.frontend_url],
-    allow_credentials=True,  # required for cookies
+    allow_origins=_origins,
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
