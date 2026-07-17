@@ -28,6 +28,11 @@ if TYPE_CHECKING:
 
 settings = get_settings()
 
+print("========== STARTUP CONFIG ==========")
+print("Embedding model:", settings.gemini_embedding_model)
+print("Generation model:", settings.gemini_generation_model)
+print("====================================")
+
 SYSTEM_PROMPT = """You are Startup Navigator's AI assistant. Your job is to help entrepreneurs
 with questions about starting, funding, and growing their businesses.
 
