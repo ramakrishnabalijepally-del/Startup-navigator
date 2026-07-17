@@ -133,6 +133,8 @@ class RAGService:
         Embed query → retrieve top-k chunks → generate answer.
         Returns: {answer, sources: [{article_id, title, category, excerpt}]}
         """
+        import traceback as _tb
+
         docs_with_scores = self._vectorstore.similarity_search_with_relevance_scores(
             query, k=settings.rag_top_k
         )
@@ -158,8 +160,30 @@ class RAGService:
             for d in top_docs
         )
 
+        # ── DEBUG: log model identity before calling Gemini ──────────────
+        api_key_prefix = (settings.google_api_key or "")[:8]
+        llm_model_attr = getattr(self._llm, "model", None) or getattr(self._llm, "model_name", None)
+        print("===== RAG DEBUG: PRE-INVOKE =====")
+        print(f"  settings.gemini_generation_model : {settings.gemini_generation_model}")
+        print(f"  settings.gemini_embedding_model  : {settings.gemini_embedding_model}")
+        print(f"  self._llm                        : {self._llm!r}")
+        print(f"  self._llm model attr             : {llm_model_attr}")
+        print(f"  google_api_key prefix (8 chars)  : {api_key_prefix}...")
+        print("=================================")
+        # ─────────────────────────────────────────────────────────────────
+
         chain = self._prompt | self._llm
-        result = chain.invoke({"context": context, "question": query})
+        try:
+            result = chain.invoke({"context": context, "question": query})
+        except Exception as exc:
+            print("===== RAG DEBUG: INVOKE FAILED =====")
+            print(f"  generation model : {settings.gemini_generation_model}")
+            print(f"  embedding model  : {settings.gemini_embedding_model}")
+            print(f"  exception repr   : {exc!r}")
+            print(f"  traceback:\n{_tb.format_exc()}")
+            print("====================================")
+            raise
+
         answer = result.content if hasattr(result, "content") else str(result)
 
         sources = [
