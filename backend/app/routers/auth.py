@@ -85,8 +85,8 @@ def refresh(
 
 @router.post("/logout")
 def logout(response: Response):
-    response.delete_cookie("access_token")
-    response.delete_cookie("refresh_token")
+    response.delete_cookie("access_token", **COOKIE_OPTS)
+    response.delete_cookie("refresh_token", **COOKIE_OPTS)
     return {"message": "Logged out"}
 
 
