@@ -1,7 +1,7 @@
 """
 RAG service: LangChain + ChromaDB + Google Gemini.
 
-Embedding: gemini-embedding-004 (via langchain-google-genai)
+Embedding: gemini-embedding-001 (via langchain-google-genai)
 Generation: gemini-2.0-flash
 
 ChromaDB is file-persisted at settings.chroma_persist_dir.
@@ -27,11 +27,6 @@ if TYPE_CHECKING:
     from app.models.article import Article
 
 settings = get_settings()
-
-print("========== STARTUP CONFIG ==========")
-print("Embedding model:", settings.gemini_embedding_model)
-print("Generation model:", settings.gemini_generation_model)
-print("====================================")
 
 SYSTEM_PROMPT = """You are Startup Navigator's AI assistant. Your job is to help entrepreneurs
 with questions about starting, funding, and growing their businesses.

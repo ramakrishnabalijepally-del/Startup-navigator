@@ -8,9 +8,9 @@ A production-ready, full-stack AI-powered web application that helps entrepreneu
 
 | Service | URL |
 |---------|-----|
-| Frontend | Deploy to Vercel (see below) |
-| Backend API | Deploy to Render (see below) |
-| API Docs | `https://your-backend.onrender.com/docs` |
+| Frontend | https://startup-navigator-rouge.vercel.app |
+| Backend API | https://startup-navigator-api-vkbr.onrender.com |
+| API Docs | https://startup-navigator-api-vkbr.onrender.com/docs |
 
 ---
 
