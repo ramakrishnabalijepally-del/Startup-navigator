@@ -97,13 +97,31 @@ Used to synthesise answers from retrieved context chunks. The system prompt expl
 2. At query time: embed query → retrieve top-5 chunks → de-duplicate by article → pass as context to Gemini
 3. Every query, answer, and sources list is stored in `search_history` for dashboard/analytics
 
-### System Prompt Strategy
+### Prompts Used
+
+**System prompt** (sent with every AI Search request):
 ```
-Answer ONLY from the context provided. Be specific and cite relevant details.
-If the answer is not in the context, say explicitly that you don't have enough information.
-Do not use prior training knowledge about specific laws or regulations.
+You are Startup Navigator's AI assistant. Your job is to help entrepreneurs
+with questions about starting, funding, and growing their businesses.
+
+Answer the question using ONLY the context provided below. Be specific, practical, and cite
+relevant details from the context. If the answer is not found in the context, say:
+"I don't have enough information in my knowledge base to answer that. Try rephrasing your
+question or browse the Explore Topics section."
+
+Do not make up information. Do not use prior training knowledge about specific laws or
+regulations without grounding it in the provided context.
+
+Context:
+{context}
 ```
-This grounds the model and makes answers trustworthy for a legal/regulatory domain.
+
+**Human turn prompt**:
+```
+Question: {question}
+```
+
+**Why this design**: The system prompt explicitly restricts the model to provided context only — critical for a legal/regulatory domain where hallucinated advice could cause real harm. The "say so when you don't know" instruction prevents silent failures and guides users toward the Explore section instead.
 
 ---
 
